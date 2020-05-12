@@ -1,0 +1,19 @@
+{% autoescape off %}
+    Hi {{ user.full_name }}, Welcome to Eheroes
+
+    Eheros is a platform which has been developed on the vision to support the community within your city, country and
+    the globe here you can request for help, we will try to connect the heroes that are near you.
+
+    To become a hero you need to help others as well, the more you help the more points you get and will be ranked #10
+    in city, country, globe you can share your badges and achievements on facebook, google+, instagram and many other
+    platforms
+
+    Please click on the link below to confirm your registration,
+    http://{{ domain }}{% url 'application:activate' uidb64=uid token=token %}
+
+    In the time of this worldwide pendamic COVID-19
+    "Be a reason of someone to smile"
+
+    Thanks
+    Team Eheroes
+{% endautoescape %}

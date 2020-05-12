@@ -1,0 +1,127 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>EHelp | Signup</title>
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/bootstraps-min-max-cdn.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/main.css' %}">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+        }
+
+        #sticky-footer {
+            flex-shrink: none;
+        }
+
+        /* Other Classes for Page Styling */
+
+        body {
+            background: #007bff;
+            background: linear-gradient(to right, #0062E6, #33AEFF);
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column">
+<div id="page-content">
+    <div class="container text-center text-light">
+        {#        <img class="rounded mx-auto d-block" src="{% static 'application/images/tb-logo.png' %}" height="100">#}
+        <p class="mt-3" style="margin-bottom: 0px"><b class="h3">Ehelp</b><small> DEMO v0.0.1</small></p>
+        <small class="text-center border-bottom top-20">Be a reason of someone to Smile</small>
+        <div class="row d-flex justify-content-center">
+
+            {# CENTER DIV #}
+            <div class="col-md-6 mt-sm-0 my-4 my-sm-5">
+                <div class="p-5 bg-light text-dark rounded my-sm-2 shadow-lg">
+                    {% if messages %}
+                        <div class="small">
+                            {% for message in messages %}
+                                {% if message.tags == 'info' %}
+                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'debug' %}
+                                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'success' %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'error' %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <i class="fa fa-user-circle h1"></i>
+                    <form action="" method="post" autocomplete="off" class="text-left small">
+                        {% csrf_token %}
+
+                        {{ form | crispy }}
+                        <div class="text-center">
+                            <input type="submit" value="Sign Up" class="btn btn-sm btn-success">
+                        </div>
+                    </form>
+                <p><a href="/accounts/login/" class="text-primary small">Already an account login here ?</a></p>
+                </div>
+            </div>
+            <!--Grid column-->
+
+        </div>
+    </div>
+</div>
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+        <small>Copyright 2020 - 2020 &copy; <a href="#" class="text-white-50"><b class="text-success">E</b>help</a>
+            powered by <a href="#">MARK</a> under the supervision of <a href="#">Bilal Khan</a></small>
+    </div>
+</footer>
+
+{# jQuery first, then Popper.js, then Bootstrap JS #}
+<script src="{% static 'application/js/ajax_googlepis_ajax_jquerry.js' %}"></script>
+<script src="{% static 'application/js/js-popper1.16.0.js' %}"></script>
+<script src="{% static 'application/js/bootstraps_min.js' %}"></script>
+</body>
+</html>

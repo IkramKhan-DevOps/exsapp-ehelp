@@ -1,0 +1,276 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+    {# MAIN-DIV #}
+    <div id="text-secondary">
+        {% if messages %}
+            <div class="small">
+                {% for message in messages %}
+                    {% if message.tags == 'info' %}
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <strong>{{ message.tags }}! </strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% elif message.tags == 'debug' %}
+                        <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                            <strong>{{ message.tags }}! </strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% elif message.tags == 'success' %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ message.tags }}! </strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>{{ message.tags }}! </strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{ message.tags }}! </strong> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <p class="border-bottom row p-4"><b>Request description</b><br></p>
+        <form class="text-left" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+            <div class="row text-secondary small">
+                <div class="col-sm-8 ">
+
+
+                    <div class="border border-bottom-0 mb-2">
+                        <div class="p-4 border-bottom bg-light text-secondary">
+                            <h6>Request</h6>
+                        </div>
+                        <div class="p-4 border-bottom">
+                            <p>{{ user_request.desc }}</p>
+                        </div>
+                        <div class="p-4 border-bottom">
+                            <div>
+
+                                <span class="p-1 bg-dark text-light">{{ user_request.city.name }}</span>
+                                <span class="p-1 bg-dark text-light">{{ user_request.country.name }}</span>
+                                <span class="p-1 bg-dark text-light">{{ user_request.request_category.name }}</span>
+                                <p class=></p>
+
+                                {% if user_request.supply %}
+                                    <span class="p-2 border border-danger text-danger">shipment required</span>
+                                {% else %}
+                                    <span class="p-2 border border-success text-success">shipment not required</span>
+                                {% endif %}
+                                {#                                <p class="font-italic text-right small">created: {{ user_request.created }}</p>#}
+                                {% if is_sender %}
+                                    <p class="font-italic mt-4">Posted request on {{ user_request.created }}</p>
+                                {% else %}
+                                    <p class="font-italic mt-4"><a
+                                        href="/dashboard/{{ user_request.user.id }}/">{{ user_request.user.full_name }}</a>
+                                    posted request on {{ user_request.created }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-4">
+                    {# REQUEST DETAILS #}
+
+                    {% if is_sender %}
+                        <div class="border border-bottom-0 mb-2">
+
+                            {# TITLE #}
+                            <div class="p-4 border-bottom bg-light text-secondary">
+                                <h6>Response Hero</h6>
+                            </div>
+
+                            {% if not user_request.accepted and not user_request.delivered %}
+
+                                <div class="p-4 small border-bottom">
+                                    <p class="text-danger">
+                                        <b>NOTE: </b> response and your hero profile will be available soon
+                                    </p>
+                                </div>
+
+                            {% elif user_request.accepted and not user_request.delivered %}
+                                {# RESPONSE STATUS #}
+                                {# USER = REQUSTER - WHEN REQUEST ACCEPTED#}
+                                <div class="p-4 border-bottom small">
+                                    <form action="completed/request/{{ user_request.id }}/" method="post"
+                                          autocomplete="off">
+                                        {% csrf_token %}
+                                        <p>
+                                            <b class="border-bottom">NOTE</b><br>
+                                            Your request has been accepted by your hero, help is on the way soon
+                                            shipment will
+                                            be arrived or you can catch it by yourself.
+                                        </p>
+                                        <p>
+                                            Be careful here, don't answer this question until and unless your
+                                            hero fulfills your request, once you click your hero will be rewarded
+                                            and your request will be considered as fulfilled and it will be closed
+                                            forever and
+                                            you will be directed to next final step
+                                        </p>
+                                        <div class="form-group">
+                                            <label for="feedback">Feedback for response and
+                                                hero</label>
+                                            <textarea class="form-control form-control-sm" id="feedback" name="feedback"
+                                                      rows="5"></textarea>
+                                        </div>
+                                        <p>
+                                            <b class="border-bottom">QUESTION </b><br>
+                                            Did help arrived from your hero ?
+                                        </p>
+                                        <input type="submit" class="btn btn-sm btn-success" value="Yes, Request Close">
+                                    </form>
+                                </div>
+
+                            {% elif user_request.accepted and user_request.delivered and not user_request.active %}
+                                {# RESPONSE NOT FOUND #}
+                                {# USER = HERO - ACCEPTED AND CONFIRMED BUT NO FEEDBACK #}
+                                <div class="p-4 border-bottom">
+                                    <p class="bg-danger p-2 text-center text-light">request closed</p>
+                                    <div class="text-center p-2">
+                                        <img class="rounded-circle" src="{{ hero_response.user.profile.url }}"
+                                             height="50px"><br>
+                                        <a href="/profile/{{ hero_response.user.id }}/">{{ hero_response.user.full_name }}</a><br>
+                                        <small>{{ hero_response.user.code }}</small>
+                                    </div>
+                                    <p class="bg-light p-2">Achievement Points</p>
+                                    <table class="text-left table table-sm text-secondary table-bordered table-hover">
+                                        <tr>
+                                            <td class="px-2">Request</td>
+                                            <td class="px-2">{{ hero_response.request_points }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2">Shipment</td>
+                                            <td class=" px-2">{{ hero_response.shipment_points }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2">Other</td>
+                                            <td class="px-2">{{ hero_response.other_points }}</td>
+                                        </tr>
+                                        <tr class="bg-dark text-light">
+                                            <td class="px-2 border border-dark">Total</td>
+                                            <td class="px-2 border border-dark">{{ total }}</td>
+                                        </tr>
+                                    </table>
+                                    <p class="bg-light p-2">Your Feedback</p>
+
+                                    {% if user_request.active %}
+                                        <p class="small text-danger">
+                                            your requester didn't gave you a feedback, consult him
+                                        </p>
+                                    {% else %}
+                                        <p class="small text-secondary">
+                                            {{ hero_response.desc }}
+                                        </p>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                    {% else %}
+                        <div class="border border-bottom-0 mb-2">
+
+
+                            {# TITLE #}
+                            <div class="p-4 border-bottom bg-light text-secondary">
+                                <h6>Response Hero</h6>
+                            </div>
+
+                            {% if user_request.accepted and not user_request.delivered %}
+                                {# RESPONSE NOT FOUND #}
+                                {# USER = HERO - ACCEPTED NOT CONFIRMED #}
+                                <div class="p-4 small border-bottom">
+                                    <p class="text-secondary">
+                                        <b>NOTE: </b> Your requester didn't confirmed help completion, it may be
+                                        due to
+                                        shipment
+                                        not arrived or requester forgets to confirm, if you helped your
+                                        requester and
+                                        fulfilled
+                                        request please consult your requester and ask to confirm.
+                                    </p>
+                                </div>
+                            {% else %}
+
+                                {# RESPONSE NOT FOUND #}
+                                {# USER = HERO - ACCEPTED AND CONFIRMED BUT NO FEEDBACK #}
+                                <div class="p-4 border-bottom">
+                                    <p class="bg-danger p-2 text-center text-light">request closed</p>
+
+                                    <p class="bg-light p-2">Achievement Points</p>
+                                    <table class="text-left table table-sm text-secondary table-bordered table-hover">
+                                        <tr>
+                                            <td class="px-2">Request</td>
+                                            <td class="px-2">{{ hero_response.request_points }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2">Shipment</td>
+                                            <td class=" px-2">{{ hero_response.shipment_points }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2">Other</td>
+                                            <td class="px-2">{{ hero_response.other_points }}</td>
+                                        </tr>
+                                        <tr class="bg-dark text-light">
+                                            <td class="px-2 border border-dark">Total</td>
+                                            <td class="px-2 border border-dark">{{ total }}</td>
+                                        </tr>
+                                    </table>
+                                    <p class="bg-light p-2">Requester Feedback</p>
+
+                                    {% if user_request.active %}
+                                        <p class="small text-danger">
+                                            your requester didn't gave you a feedback, consult him
+                                        </p>
+                                    {% else %}
+                                        <p class="small text-secondary">
+                                            {{ hero_response.desc }}
+                                        </p>
+                                    {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {# RESPONSE CANCEL #}
+                            {# USER = HERO - REQUEST NOT ACTIVE #}
+                            {% if user_request.active %}
+                                <div class="p-4 small border-bottom">
+                                    <p class="text-danger">
+                                        <b>Agreement: </b> I know by cancelling accepted request decreases my
+                                        achievement
+                                        points and i am agreed to cancel this request.
+                                    </p>
+                                    <a class="btn btn-sm btn-danger text-light"
+                                       href="/delete/response/{{ user_request.id }}/{{ hero_response.id }}/">
+                                        <i class="fa fa-trash"></i>Cancel
+                                    </a>
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                    {% endif %}
+        </form>
+    </div>
+{% endblock %}

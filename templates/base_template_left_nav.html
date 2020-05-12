@@ -1,0 +1,96 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>E help |
+
+        {# BASE HALF TITLE #}
+        {% block base_title %}{% endblock %}
+        {# --------------- #}
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/bootstraps-min-max-cdn.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/main.css' %}">
+
+
+    {# BASE LINKS THAT ARE REQUIRED FOR CERTAIN PAGE #}
+    {% block base_links %} {% endblock %}
+    {# --------------------------------------------- #}
+
+</head>
+<body>
+
+
+{# BASE TOP NAVIGATION PANEL AREA #}
+{% block base_top_nav %} {% include 'application/base_top_nav.html' %}  {% endblock %}
+{# ------------------------------ #}
+
+
+{% block base_content_row %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 bg-light py-4">
+
+                {# BASE CONTENT LEFT NAV BAR #}
+                {% block base_content_row_col_nav %}
+                    <div class="">
+                        <div class="list-unstyled text-secondary small">
+                            <b class="list-group-item-heading pb-2"><i class="fa fa-list"></i> Information</b>
+                            <li><a href="/dashboard/" class="">Dashboard</a></li>
+                            <li><a href="/queue/" class="">Queue</a></li>
+                            <li><a href="/requests/" class="">Requests</a></li>
+                            <li><a href="/responses/" class="">Responses</a></li>
+                            <hr>
+
+                            <b class="list-group-item-heading pb-2"><i class="fa fa-wrench"></i> Settings</b>
+                            <li><a href="/profile/" class="">Profile</a></li>
+                            <hr>
+
+                            <b class="list-group-item-heading pb-2"><i class="fa fa-lock"></i> Security</b>
+                            <li><a href="/change-password/" class="">Change Password</a></li>
+                            <li><a href="/privacy/" class="">Two-Step Auth</a></li>
+                            <li><a href="/privacy/"  class="">Activate/Deactivate</a></li>
+                            <hr>
+
+                            <li><i class="fa fa-sign-out text-danger"></i><a href="/accounts/logout/" class="text-danger"> Logout</a>
+                            </li>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+
+            <div class="col-sm-10 py-4">
+                <div class="">
+
+                    {# BASE CONTENT MAIN CONTENT #}
+                    {% block base_content_row_col_content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{# jQuery first, then Popper.js, then Bootstrap JS #}
+<script src="{% static 'application/js/ajax_googlepis_ajax_jquerry.js' %}"></script>
+<script src="{% static 'application/js/js-popper1.16.0.js' %}"></script>
+<script src="{% static 'application/js/bootstraps_min.js' %}"></script>
+
+
+{# BASE INTERNAL SCRIPTS OR LINKS THAT ARE REQUIRED IN PAGE #}
+{% block base_internal_scripts %} {% endblock %}
+{# -------------------------------------------------------- #}
+
+
+</body>
+</html>
+
+
+{# BASE EXTERNAL SCRIPTS OR LINKS THAT ARE REQUIRED IN PAGE #}
+{% block base_external_scripts %} {% endblock %}
+{# -------------------------------------------------------- #}

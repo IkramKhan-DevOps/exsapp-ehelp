@@ -1,0 +1,69 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+    {# MAIN-DIV #}
+    <div id="text-secondary">
+
+        {% if messages %}
+            <div class="small p-2 text-danger ">
+                <ul class="messages list-unstyled">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <p class="border-bottom row p-4"><b>Add/Update Requests</b><br></p>
+        <form class="text-left" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+            <div class="row text-secondary small">
+                <div class="p-4 col-sm-8">
+                    <p><b>Request Details</b><br><br></p>
+                    {% csrf_token %}
+                    {{ user_request | crispy }}
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="pb-2 p-4 border bg-light border-bottom-0">
+                        <p class="border-bottom">
+                            <b>Request Agreement</b><br><br>
+                        </p>
+                        <ol class="small text-muted list-unstyled">
+                            <li>The request is from you not from <a href="#">E-Help</a></li>
+                            <li><a href="#">E-Help</a> just provides you a platform to call for help</li>
+                            <li>Dont' ever try to miss use this platform, this platform is dedicated to help the needy
+                                people
+                            </li>
+                            <li>Reported requester will be blocked forever
+                            </li>
+                            <li>Once the hero accept your request, you will be unable to update/delete request
+                            </li>
+                            <li>if this request contain some supplements, its your choice wether your gave you by hand
+                                or you can can <b
+                                        class="text-danger"> Need Supply </b></li>
+                            in request form
+                        </ol>
+                        <input type="submit" class="btn btn-sm btn-block btn-success" value="Submit">
+                    </div>
+
+                    <div class="p-4 border bg-light">
+                        <p class="small">
+                            {{ show_delete }}
+                            Once you delete your request it will be considered as cancelled and you will not able to
+                            get back, whether you add/cancel
+                            it doesn't effect your profiled
+                        </p>
+                        <a type="submit" href="/delete/request/{{ user_request.instance.id }}/"
+                           class="btn btn-sm btn-block btn-danger">
+                            <i class="fa fa-trash"></i> Remove
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

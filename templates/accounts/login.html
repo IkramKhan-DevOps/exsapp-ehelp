@@ -1,0 +1,86 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>EHelp | Signin</title>
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/bootstraps-min-max-cdn.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/main.css' %}">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+        }
+
+        #sticky-footer {
+            flex-shrink: none;
+        }
+
+        /* Other Classes for Page Styling */
+
+        body {
+            background: #007bff;
+            background: linear-gradient(to right, #0062E6, #33AEFF);
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column">
+<div id="page-content">
+    <div class="container text-center text-light">
+        {#        <img class="rounded mx-auto d-block" src="{% static 'application/images/tb-logo.png' %}" height="100">#}
+        <h2 class="mt-5">Ehelp</h2>
+        <p class="text-center small">Be a reason of someone to Smile</p>
+        <div class="row d-flex justify-content-center">
+
+            {# CENTER DIV #}
+            <div class="col-md-4 mt-sm-5">
+                <div class="p-5 bg-light text-dark rounded mt-sm-5 shadow-lg">
+                    <p class="lead border-bottom pb-4">Login</p>
+                    <form action="/accounts/login/" method="post" autocomplete="off" class="text-left small">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{ request.GET.next }}">
+                        {% endif %}
+                        <div class="text-center">
+                            <input type="submit" value="Login" class="btn btn-sm btn-success">
+                        </div>
+                    </form>
+                <p><a href="#" class="text-danger small">Forget Password ?</a></p>
+                </div>
+            </div>
+            <!--Grid column-->
+
+        </div>
+    </div>
+</div>
+<footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+    <div class="container text-center">
+        <small>Copyright 2020 - 2020 &copy; <a href="#" class="text-white-50"><b class="text-success">E</b>help</a>
+            powered by <a href="#">MARK</a></small>
+    </div>
+</footer>
+
+{# jQuery first, then Popper.js, then Bootstrap JS #}
+<script src="{% static 'application/js/ajax_googlepis_ajax_jquerry.js' %}"></script>
+<script src="{% static 'application/js/js-popper1.16.0.js' %}"></script>
+<script src="{% static 'application/js/bootstraps_min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+    {# MAIN-DIV #}
+    <div id="main-div text-secondary" xmlns="http://www.w3.org/1999/html">
+        <p class="border-bottom row p-4"><b>Privacy Settings</b><br></p>
+
+
+        {# ----------------------------- #}
+        <div id="pass-div" class="row px-2 justify-content-center">
+            <div class="col-sm-4 p-4" id="forget_pass">
+                <p class="p-2 border-bottom">Password Change</p>
+                <form action="" method="post" autocomplete="off" class="text-left small">
+                    {% csrf_token %}
+                    {{ password_change_form | crispy }}
+                    <input type="submit" value="Change Password" class="btn btn-sm btn-success">
+                </form>
+            </div>
+
+            <div class="col-sm-4 p-4" id="two_step_auth">
+                <p class="p-2 border-bottom">Two Step Authentication</p>
+                <div class="form-group">
+                    <label for="previous-pass" class="small">Password</label>
+                    <input type="password" class="form-control form-control-sm" id="previous-pass">
+                </div>
+                <div class="form-group">
+                    <label for="previous-pass" class="small">Phone <small class="text-danger">( not-confirmed )</small></label>
+                    <input type="password" class="form-control form-control-sm" id="previous-pass">
+                </div>
+
+                <div class="form-group">
+
+                    <input type="checkbox" class="rounded-0 border-bottom-0" id="new-pass">
+                    <small for="previous-pass" class="small text-muted">Please confirm your phone no first, two-step
+                        auth means every login you need to confirm it by a code that we securely sent to your
+                        phone</small>
+                </div>
+                <button class="btn btn-sm btn-secondary"><i class="fa fa-user-secret"></i> Save</button>
+            </div>
+
+            <div class="col-sm-4 p-4" id="deactivate_account">
+                <p class="p-2 border-bottom">Deactivate/Delete Account</p>
+
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="previous-pass" class="small">Password</label>
+                        <input type="password" class="form-control form-control-sm" id="previous-pass">
+                    </div>
+
+                    <p for="previous-pass" class="small text-muted">
+                        <b>DELETE: </b> all your previous data, orders, with list your complete account will be
+                        deactivated<br><br>
+                        <b>DEACTIVATE: </b> your account will not be available on tarbazar, it can't searched or viewed
+                        until you login again, its better to deactivate then to delete
+                    </p>
+                    <button class="btn btn-sm btn-warning"><i class="fa fa-times"></i> Deactivate</button>
+                    <button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+        {# ------------------------------ #}
+    </div>
+{% endblock %}

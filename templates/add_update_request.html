@@ -1,0 +1,44 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+    {# MAIN-DIV #}
+    <div id="text-secondary">
+        <p class="border-bottom row p-4"><b>New Request</b><br></p>
+        <form class="text-left" action="" method="post" enctype="multipart/form-data" autocomplete="off">
+            <div class="row text-secondary">
+                <div class="p-4 col-sm-8">
+                    <p><b>Request Details</b><br><br></p>
+                    {% csrf_token %}
+                    {{ user_request | crispy }}
+                </div>
+
+                <div class="p-4 col-sm-4">
+                    <div id="aggrement-div">
+                        <p>
+                            <b>Response Agreement</b><br><br>
+                            Please read the agreement below, if you satisfied then make a request
+                        </p>
+                        <ol class="small text-muted">
+                            <li>The request is from you not from <a href="#">E-Help</a></li>
+                            <li><a href="#">E-Help</a> just provides you a platform to call for help</li>
+                            <li>Dont' ever try to miss use this platform, this platform is dedicated to help the needy
+                                people
+                            </li>
+                            <li>Reported requester will be blocked forever
+                            </li>
+                            <li>Once the hero accept your request, it will be unable to update or change again
+                            </li>
+                            <li> if you are unable to catch that help by yourself request the hero by activating <b
+                                    class="text-danger"> Need Help </b></li>
+                            in request form
+                        </ol>
+                    </div>
+                    <input type="submit" class="btn btn-sm btn-block btn-success" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

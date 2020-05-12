@@ -1,0 +1,123 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+
+    {% if messages %}
+        <div class="small">
+            {% for message in messages %}
+                {% if message.tags == 'info' %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'debug' %}
+                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div id="main-div text-secondary">
+        <p class="border-bottom row p-4"><b>Queue List</b><br></p>
+
+        {# MAIN-DIV #}
+        <div class="row">
+
+            {# MAIN-DIV-COL-CENTER-6 #}
+            <div class="col-sm-12 p-sm-5">
+                {% for queue_request in queue_requests %}
+                    {# REQUEST Normal 1#}
+                    <p class="small font-italic">Request Queued on {{ queue_request.created }}</p>
+                    <div class="border mb-2 bg-white">
+                        {# HEAD #}
+                        <div class="p-2 bg-light text-secondary border-bottom">
+                            <table class="small">
+                                <tr>
+                                    <td rowspan="2">
+                                        <img class="rounded-circle" src="{{ queue_request.request.user.profile.url }}"
+                                             style="width: 25px;height: 25px;">
+                                    </td>
+                                    <td>
+                                        <b>{{ queue_request.request.user.full_name }}</b> called heroes for help.<br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        {# BODY #}
+                        <div>
+                            {# CONTENT #}
+                            <div class="p-2 small">
+                                <p>
+                                    {{ queue_request.request.desc }}
+                                </p>
+                                <small class="font-italic">Created: {{ queue_request.request.created }}</small>
+                                {#                                        <img class="img-fluid my-3" src="{% static 'application/images/covid-image.jpg' %}">#}
+                            </div>
+                        </div>
+
+                        {# FOOT #}
+                        <div class="border-top p-sm-3 p-1">
+                            <div class="row p-1">
+                                <div class="col-6 text-left">
+                                    <a class="btn btn-sm btn-outline-success"
+                                       href="/add/response/{{ queue_request.request.pk }}/" type="button">
+                                        <i class="fa fa-plus"></i> Add
+                                    </a>
+                                    <a class="btn btn-sm btn-outline-secondary"
+                                       href="/dashboard/{{ queue_request.request.user.pk }}/" type="button">
+                                        <i class="fa fa-phone"></i> Contact
+                                    </a>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <a class="btn btn-sm btn-danger" href="/queue/delete/{{ queue_request.pk }}/"
+                                       type="button">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            {# MAIN-DIV-COL-CENTER-6 #}
+            <div class="col-sm-6 p-sm-4">
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,335 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+
+{% block base_title %}Home{% endblock %}
+{% block base_contents %}
+
+    <div>
+        {# MAIN-DIV-ROW #}
+        <div class="row">
+
+            {# MAIN-DIV-COL-LEFT-2 #}
+            <div class="col-sm-2 py-4 bg-light">
+                <div class="list-unstyled text-secondary small">
+                    <b class="list-group-item-heading"><i class="fa fa-search-plus"></i> Search Filters</b>
+
+                    <li class="mt-2"><input type="search" class="form-control form-control-sm"
+                                            placeholder="city /country"></li>
+                    <li class="mt-2"><select class="form-control form-control-sm" placeholder="Request Type">
+                        <option>-- request type --</option>
+                        <option>Money</option>
+                        <option>Equipment</option>
+                    </select></li>
+                    <li class="mt-2"><input type="checkbox" class="form-check-label"> Mansehra</li>
+                    <li><input type="checkbox" class="form-check-label"> Pakistan</li>
+                    <li><input type="checkbox" class="form-check-label"> International</li>
+
+                    <li class="border-bottom border-top border-danger py-1 mt-2"><input type="checkbox"
+                                                                                        class="form-check-label"> urgent
+                        help
+                    </li>
+                    <li><input type="submit" class="mt-2 btn btn-sm btn-primary" value="Find"></li>
+
+                    <hr>
+
+                    <li><i class="fa fa-sign-out text-danger"></i>
+                        {% if not request.user.is_authenticated %}
+                            <a href="/accounts/login/" class="text-danger"> Login</a>
+                        {% else %}
+                            <a href="/accounts/logout/" class="text-danger"> Logout</a>
+                        {% endif %}
+                    </li>
+                </div>
+            </div>
+
+            {# MAIN-DIV-COL-CENTER-6 #}
+            <div class="col-sm-7 py-sm-4">
+
+                {# MAIN-DIV #}
+                <div>
+
+                    {% if messages %}
+                        <div class="small">
+                            {% for message in messages %}
+                                {% if message.tags == 'info' %}
+                                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'debug' %}
+                                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'success' %}
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% elif message.tags == 'error' %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong>{{ message.tags }}! </strong> {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+
+                    {# ADD-REQUEST-DIV #}
+                <a href="/add/request/" class="text-decoration-none">
+                    <div class="border mb-4 bg-white">
+
+                        <textarea class="p-2 border-bottom border-top-0 border-left-0 border-right-0" rows="10"
+                                  style="width: 100%;font-size: 13px;"
+                                  placeholder="what problem you are facing say it now, there is a hero ready to help ."></textarea>
+                        <div class="row p-3">
+                            <div class="col-6">
+                                <select class="small form-control form-control-sm bg-light border-0" disabled>
+                                    <option>Category</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-right">
+                                    <small class="text-danger"><input type="checkbox" class="form-check-label">
+                                        urgent</small>
+                                    <button class="btn btn-sm bg-light border"><i class="fa fa-image"></i></button>
+                                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+
+                    {# ADD-REQUEST-CYCLE #}
+
+                    <div>
+                        {% for user_request in user_requests %}
+                            {# REQUEST Normal 1#}
+                            {% if user_request.user != request.user %}
+                                <div class="border mb-2 bg-white">
+
+                                    {# HEAD #}
+                                    <div class="p-2 bg-light text-secondary">
+                                        <table class="small">
+                                            <tr>
+                                                <td rowspan="2">
+                                                    <img class="rounded-circle"
+                                                         src="{{ user_request.user.profile.url }}"
+                                                         style="width: 25px;height: 25px;">
+                                                </td>
+                                                <td>
+                                                    <b>{{ user_request.user.full_name }}</b> need help
+                                                    for {{ user_request.request_category.name }}
+                                                    from {{ user_request.city.name }}, {{ user_request.country.name }}<br>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    {# BODY #}
+                                    <div>
+                                        {# CONTENT #}
+                                        <div class="p-4 small border-bottom">
+                                            <p>
+                                                {{ user_request.desc }}
+                                            </p>
+                                            <small class="font-italic">Created: {{ user_request.created }}</small>
+                                            {#                                        <img class="img-fluid my-3" src="{% static 'application/images/covid-image.jpg' %}">#}
+                                        </div>
+                                    </div>
+
+                                    {# FOOT #}
+                                    <div>
+                                        <div class="row p-4">
+                                            <div class="col-6 text-left">
+
+                                                {% if user_request.pk in user_queue.pk %}
+                                                    <a class="btn btn-sm btn-outline-secondary"
+                                                       href="#">
+                                                        <i class="fa fa-plus"></i> Queued
+                                                    </a>
+                                                {% else %}
+                                                    <a class="btn btn-sm btn-outline-success"
+                                                       href="/queue/add/{{ user_request.pk }}/">
+                                                        <i class="fa fa-plus"></i> Add
+                                                    </a>
+                                                {% endif %}
+                                                {#                                            <button class="btn btn-sm btn-outline-success" type="button"#}
+                                                {#                                                    class="btn btn-primary" data-toggle="modal"#}
+                                                {#                                                    data-target="#exampleModal">#}
+                                                {#                                                <i class="fa fa-plus"></i> Accept#}
+                                                {#                                            </button>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+
+            {# MAIN-DIV-COL-RIGHT-2 #}
+            <div class="col-sm-3 py-4 bg-light text-secondary">
+
+                {# HERO DIV #}
+                <div class="p-2 mb-2 border">
+                    <p class="text-center">HEROES</p>
+                    <div class="table-responsive">
+                        <table class="table table-borderless small text-center">
+                            <tr class="border-bottom">
+                                <td>
+                                    <i class="fa fa-user-circle" style="font-size: 40px;"></i><br>
+                                    <a href="#">un ranked</a><br>
+                                    #1 Globally<br>
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-heart"></i> Follow
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td>
+                                    <i class="fa fa-user-circle" style="font-size: 40px;"></i><br>
+                                    <a href="#">un ranked</a><br>
+                                    #1
+                                    {% if request.user.country %}
+                                        {{ request.user.country.name }}<br>
+                                    {% else %}
+                                        city not found please update your <a href="/profile/#id_country">profile</a><br>
+                                    {% endif %}
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-heart"></i> Follow
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td>
+                                    <i class="fa fa-user-circle" style="font-size: 40px;"></i><br>
+                                    <a href="#">un ranked</a><br>
+                                    #1
+                                    {% if request.user.city %}
+                                        {{ request.user.city.name }}<br>
+                                    {% else %}
+                                        city not found please update your <a href="/profile/#id_city">profile</a><br>
+                                    {% endif %}
+
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-heart"></i> Follow
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">View #100 Globally</a><br>
+                                    <a href="#">View #100 Pakistan</a><br>
+                                    <a href="#">View #100 Abbotabad</a><br>
+                                    <a href="#"><b>Watch yourself</b></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                {# AIDS-1 #}
+                <div class="p-2  small">
+                    <img src="{% static 'application/images/download.jpg' %}" class="img-fluid"><br>
+                    <b>Amazon Cloud AD-1</b>
+                    <p class="small">
+                        cloud based systems are developed to make things secure reuse able and robust
+                    </p>
+                </div>
+                {# AIDS-1 #}
+                <div class="p-2  small">
+                    <img src="{% static 'application/images/covid-image.jpg' %}" class="img-fluid"><br>
+                    <b>Tarbazar inc AD-2</b>
+                    <p class="small">
+                        cloud based systems are pos and ecommerce setup to enhance business and logics
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contact and Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <b>Requester Contact</b><br><br>
+                    <div>
+                        <div class="text-center">
+                            <img src="{% static 'application/images/companyLogo.png' %}" height="100px">
+                            <p class="mt-1"><a href="#">Person Name</a></p>
+                            <p class="small text-muted top-20">Requester</p>
+                            <p class="small text-muted top-20">House#00, Street anonymous, City State, Country
+                                <i class="fa fa-location-arrow border p-1"></i></p>
+                        </div>
+                        <div class="text-center text-muted">
+                            <p><i class="fa fa-phone"></i> +00 000 000 000</p>
+                            <p class="top-20"><i class="fa fa-whatsapp"></i> +00 000 000 000</p>
+                            <p class="top-20"><i class="fa fa-telegram"></i> +00 000 000 000</p>
+                            <p class="top-20"><i class="fa fa-telegram"></i> +00 000 000 000</p>
+                            <p class="top-20"><i class="fa fa-facebook-square"></i> facebook.com/235237823</p>
+                            <p class="top-20"><i class="fa fa-envelope-o"></i> unknown@yahoo.com</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id="aggrement-div">
+                        <p>
+                            <b>Response Agreement</b><br><br>
+                            Please read the agreement below, if you satisfied then make a response
+                        </p>
+                        <ol class="small text-muted">
+                            <li>The request is from this user not for <a href="#">E-Help</a></li>
+                            <li><a href="#">E-Help</a> just provides you a platform to help the needy</li>
+                            <li>Before accepting request add it to queue contact the requester, satisfy your self then
+                                make a response
+                            </li>
+                            <li>There is no way to detect fake requests, we are not responsible for any loss
+                            </li>
+                            <li>Reported requester will be blocked forever
+                            </li>
+                            <li>Once the request accepted and not fulfilled will effect your rank and decreases
+                                achievement points
+                            </li>
+                            <li>Delivery for your side gives you <b class="text-success">+5</b> points</li>
+                        </ol>
+                        <input type="checkbox" class=""> i am satisfied with the agreement above
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Queue</button>
+                    <button class="btn btn-sm btn-success"><i class="fa fa-check"></i> Accept</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <title>EHelp |
+
+        {# BASE HALF TITLE #}
+        {% block base_title %}{% endblock %}
+        {# --------------- #}
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/bootstraps-min-max-cdn.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'application/css/main.css' %}">
+
+
+    {# BASE LINKS THAT ARE REQUIRED FOR CERTAIN PAGE #}
+    {% block base_links %} {% endblock %}
+    {# --------------------------------------------- #}
+
+</head>
+<body class="bg-light ">
+
+
+{# BASE TOP NAVIGATION PANEL AREA #}
+{% block base_top_nav %} {% include 'application/base_top_nav.html' %} {% endblock %}
+{# ------------------------------ #}
+
+
+{# BASE LEFT NAVIGATION PANEL AREA #}
+{% block base_left_nav %}{% endblock %}
+{# ------------------------------ #}
+
+
+<div class="container" style="z-index: 0;">
+
+        {# MAIN_CONTENTS_AREA #}
+        {% block base_contents %} {% endblock %}
+        {# ------------------ #}
+
+</div>
+
+{# jQuery first, then Popper.js, then Bootstrap JS #}
+<script src="{% static 'application/js/ajax_googlepis_ajax_jquerry.js' %}"></script>
+<script src="{% static 'application/js/js-popper1.16.0.js' %}"></script>
+<script src="{% static 'application/js/bootstraps_min.js' %}"></script>
+
+
+{# BASE INTERNAL SCRIPTS OR LINKS THAT ARE REQUIRED IN PAGE #}
+{% block base_internal_scripts %} {% endblock %}
+{# -------------------------------------------------------- #}
+
+
+</body>
+</html>
+
+
+{# BASE EXTERNAL SCRIPTS OR LINKS THAT ARE REQUIRED IN PAGE #}
+{% block base_external_scripts %} {% endblock %}
+{# -------------------------------------------------------- #}

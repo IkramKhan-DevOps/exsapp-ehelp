@@ -1,0 +1,52 @@
+<!-- Navigation -->
+<!--    ===========-->
+{% load static %}
+<div class="nav bg-danger justify-content-center">
+    <a class="navbar-link text-light p-1" style="font-size: 11px;">In the time of this worldwide pendamic Be a reason
+        of someone to smile <i class="fa fa-heart text-light"></i></a>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg p-2" style="z-index: 10;">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="#" style="font-size: 16px;">EHELP <small
+                class="text-success small text-muted">demo <small>v0.0.1</small></small></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link small" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link small" href="#">Heroes</a>
+                </li>
+                {% if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link small" href="/accounts/login/"><i class="fa fa-sign-in"></i></a>
+                    </li>
+                {% else %}
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle small" href="/dashboard/" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ request.user.profile.url }}" class="rounded-circle border" height="15" width="15"> {{ request.user.full_name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item small" href="/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a>
+                        <a class="dropdown-item small" href="/profile/"><i class="fa fa-heart"></i> Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item small" href="/setting/"><i class="fa fa-refresh"></i> Settings</a>
+                        <a class="dropdown-item small" href="/privacy/"><i class="fa fa-shopping-cart"></i> Privacy</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger small" href="/accounts/logout/"><i
+                                class="fa fa-sign-out"></i> Sign Out</a>
+                    </div>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

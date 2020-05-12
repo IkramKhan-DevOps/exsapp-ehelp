@@ -1,0 +1,120 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+    {# MAIN-DIV #}
+    <div id="main-div text-secondary">
+        {# PROFILE-DIV #}
+        <div id="profile-div" class="border-bottom text-center p-4">
+            <a href="{{ user.profile.url }}">
+                <img src="{{ user.profile.url }}" height="150" width="150"
+                     class="rounded-circle img-responsive"
+                     alt="user-image">
+            </a>
+            <p class="mt-2">
+                <b class="text-dark">{{ user.full_name }} </b>
+                <a href="/profile/" class="text-secondary"><i class="fa fa-edit"></i></a><br>
+
+                <small class="text-muted"><q>{{ user.code }}</q></small><br>
+                <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-users"></i> Follow
+                    <small>{{ user.subscribers }}</small></button>
+                <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-heart"></i> Heart
+                    <small>{{ user.hearts }}</small>
+                </button>
+            </p>
+
+            <div class="row mb-4">
+                <table class="small text-left" align="center">
+                    <tr>
+                        <td class="text-secondary px-2"><i class="fa fa-phone"></i> {{ user.phone }}</td>
+                        <td class="text-success px-2"><i class="fa fa-whatsapp"></i> {{ user.whatsapp }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-primary px-2"><a target="_blank" class="text-primary" href="https://www.facebook.com/{{ user.facebook }}"><i
+                                class="fa fa-facebook"></i> {{ user.facebook }}</a></td>
+                        <td class="text-danger px-2"><a target="_blank" class="text-danger" href="https://www.instagram.com/{{ user.instagram }}/"><i
+                                class="fa fa-instagram"></i> {{ user.instagram }}</a></td>
+                    </tr>
+                    <tr class="p-2 bg-light text-secondary text-center">
+                        <td class="" colspan="2">{{ user.address }}</td>
+                    </tr>
+
+                </table>
+            </div>
+            <p>
+                <small class="p-1 bg-dark text-light">{{ user.city }}</small>
+                <small class="p-1 bg-dark text-light">{{ user.country }}</small>
+            </p>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                     aria-valuenow="{{ achievement_points_percent }}" aria-valuemin="0" aria-valuemax="100"
+                     style="width: {{ achievement_points_percent }}%"></div>
+            </div>
+            <small>Achievement Points: {{ request.user.points }}/{{ total_achievement_points }}</small>
+        </div>
+
+        {# STATISTICS-DIV #}
+        <div id="statistics">
+            <div class="p-4 border-bottom">
+                <div class="row">
+
+                    {# SALES #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="sales">
+                        <p><small>Requests</small><br><b>{{ user.requests }}</b></p>
+                    </div>
+
+                    {# PROCEED #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="proceed">
+                        <p><small>Completed</small><br><b>2</b></p>
+                    </div>
+
+                    {# CANCLED #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="canceled">
+                        <p><small>Cancelled</small><br><b>3</b></p>
+                    </div>
+
+                    {# INCOME #}
+                    <div class=" p-1 col-sm-3 text-center" id="income">
+                        <p><small>Pending</small><br><b>1</b></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="p-4 border-bottom">
+                <div class="row">
+
+                    {# SALES #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="sales">
+                        <p><small>Responses</small><br><b>{{ user.responses }}</b></p>
+                    </div>
+
+                    {# PROCEED #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="proceed">
+                        <p><small>Completed</small><br><b>2</b></p>
+                    </div>
+
+                    {# CANCLED #}
+                    <div class="border-right p-1 col-sm-3 text-center" id="canceled">
+                        <p><small>Cancelled</small><br><b>3</b></p>
+                    </div>
+
+                    {# INCOME #}
+                    <div class=" p-1 col-sm-3 text-center" id="income">
+                        <p><small>Pending</small><br><b>1</b></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {# EXTRA-DIV #}
+        <div id="badges">
+            <div class="row text-center">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

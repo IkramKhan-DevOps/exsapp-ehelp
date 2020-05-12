@@ -1,0 +1,161 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+}
+
+#topNaviagtionBar {
+    background-color: #393d39;
+    width: 100%;
+    position: fixed;
+}
+
+.topNaviagtionBarSideBarIcon {
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.material-icons {
+    color: white;
+}
+
+.topNaviagtionBarrightsideIcon {
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.topNaviagtionBarrightsideIcon a {
+    padding: 5px;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    margin-top: -8px;
+    align-items: stretch;
+    z-index: 100;
+    overflow-x: auto;
+    transition: 0.5s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.wrapper a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.wrapper .dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
+
+
+.wrapper a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.1s;
+}
+
+#sidebar {
+    min-width: 230px;
+    max-width: 230px;
+    min-height: 100vh;
+    background: #eceff6;
+    color: black;
+    z-index: 6;
+    transition: all 0.1s;
+}
+
+#sidebar .sidebar-header {
+    padding: 10px;
+    background: #eceff6;
+    text-align: center;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid black;
+}
+
+#sidebar ul p {
+    color: #485f69;
+    padding: 10px;
+}
+
+.wrapper .dropdown ul li :hover {
+    color: black;
+}
+
+.wrapper .dropdown ul li {
+    display: flex;
+}
+
+.wrapper .dropdown ul li a {
+    padding: 2px;
+    margin: 10px;
+    color: black;
+    text-align: center;
+}
+
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 14px;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: black;
+    background: #ffffff;
+}
+
+.wrapper a[aria-expanded="true"] {
+    color: black;
+    background: #ffffff;
+}
+
+.wrapper ul ul a {
+    font-size: 14px !important;
+    background: #eceff6;
+}
+
+#sidebarCollapse {
+    cursor: pointer;
+}
+
+.fas {
+    padding-right: 6px;
+}
+
+.fab {
+    padding-right: 6px;
+}
+
+#dropdownSidebaricon {
+    float: right;
+}
+
+.footer {
+    float: inline-end;
+    font-size: 10px;
+    padding-left: 12px;
+}
+
+.footerBoldElements {
+    font-weight: bold;
+    color: red;
+}

@@ -1,0 +1,142 @@
+{% extends 'base_template_left_nav.html' %}
+{% load static %}
+
+{% block base_title %} Dashboard {% endblock %}
+
+{% block base_content_row_col_content %}
+
+    {% if messages %}
+        <div class="small">
+            {% for message in messages %}
+                {% if message.tags == 'info' %}
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'debug' %}
+                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% elif message.tags == 'error' %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>{{ message.tags }}! </strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+
+    {# MAIN-DIV #}
+    <div id="main-div text-secondary">
+        <p class="border-bottom row p-4"><b>Requests</b><br></p>
+        {# SEARCH-DIV #}
+        <div id="profile-div" class="border-bottom p-4">
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="order_id" class="ml-1 text-muted small">Request ID</label>
+                    <input type="text" class="form-control form-control-sm" id="order_id" placeholder="352173301">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="order_seller" class="ml-1 text-muted small">Select Option</label>
+                    <select class="form-control form-control-sm" id="order_seller">
+                        <option>*</option>
+                        <option>completed</option>
+                        <option>pending</option>
+                        <option>cancelled</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-sm btn-outline-success" type="button"><i class="fa fa-search"></i> Search</button>
+            <a href="/add/request/" class="btn btn-sm btn-outline-success"><i class="fa fa-plus"></i></a>
+        </div>
+    </div>
+
+    {# TABLE-DIV #}
+    <div id="statistics-div" class="p-4">
+
+        <div class="table-responsive">
+            <table class="table table-sm table-hover table-borderless">
+                <thead class=small">
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>City</th>
+                    <th>Shipment</th>
+                    <th>Accepted</th>
+                    <th>Delivered</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody class="small text-muted">
+                {% for req in user_requests_model %}
+                    <tr>
+                        <td>{{ req.pk }}</td>
+                        <td>{{ req.request_category.name }}</td>
+                        <td>{{ req.city.name }}</td>
+                        <td>
+                            {% if req.supply %}
+                                <i class="fa fa-check text-success"></i>
+                            {% else %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if req.accepted %}
+                                <i class="fa fa-check text-success"></i>
+                            {% else %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if req.delivered %}
+                                <i class="fa fa-check text-success"></i>
+                            {% else %}
+                                <i class="fa fa-times text-danger"></i>
+                            {% endif %}
+                        </td>
+                        <td>{{ req.created }}</td>
+                        <td>
+                            {% if req.accepted %}
+                                <a href="/request/description/{{ req.pk }}/"><i class="text-dark fa fa-eye"></i></a>
+                            {% else %}
+                                <a href="/update/request/{{ req.pk }}/"><i class="text-dark fa fa-edit"></i></a>
+                            {% endif %}
+                        </td>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+            <p class="text-center small"><a href="#">view more</a></p>
+        </div>
+    </div>
+    </div>
+{% endblock %}
