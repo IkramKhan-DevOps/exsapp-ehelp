@@ -35,7 +35,7 @@ from .forms import (
     FormUserContact,
     FormRequest
 )
-from HybridHeroes.application.models import (
+from ehelp.application.models import (
     Request as RequestModel,
     Account,
     Response,

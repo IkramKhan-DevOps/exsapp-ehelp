@@ -1,4 +1,4 @@
-"""HybridHeroes URL Configuration
+"""ehelp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -22,7 +22,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('HybridHeroes.application.urls', namespace='application')),
+                  path('', include('ehelp.application.urls', namespace='application')),
                   # Forget Password
                   path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
                   path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
