@@ -133,14 +133,14 @@
                                         <table class="small">
                                             <tr>
                                                 <td rowspan="2">
-                                                    <img class="rounded-circle"
+                                                    <img class="rounded-circle border"
                                                          src="{{ user_request.user.profile.url }}"
                                                          style="width: 25px;height: 25px;">
                                                 </td>
                                                 <td>
-                                                    <b>{{ user_request.user.full_name }}</b> need help
-                                                    for {{ user_request.request_category.name }}
-                                                    from {{ user_request.city.name }}, {{ user_request.country.name }}<br>
+                                                    <b><a class="text-dark" href="/dashboard/{{ user_request.user.pk }}/"> {{ user_request.user.full_name }}</a></b> needs help
+                                                    in <b>{{ user_request.request_category.name }}</b>
+                                                    from <b>{{ user_request.city.name }}, {{ user_request.country.name }}</b><br>
                                                 </td>
                                             </tr>
                                         </table>

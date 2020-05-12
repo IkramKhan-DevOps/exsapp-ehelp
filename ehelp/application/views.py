@@ -105,7 +105,7 @@ def view_home(request):
             user_requests = user_requests.exclude(queue=queue)
 
     context = {
-        'user_requests': user_requests,
+        'user_requests': user_requests.order_by('-created'),
         'user_queue': user_queue
     }
     return render(

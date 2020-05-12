@@ -25,7 +25,7 @@ SECRET_KEY = '=105i278cf5fo$grr=^kk13@&7b#^ll7fcp%78!e2hbf0k6aet'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -123,6 +123,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -131,9 +132,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'donald.duck0762@gmail.com'
-EMAIL_HOST_PASSWORD = 'poiu0987@mark'
+EMAIL_HOST_PASSWORD = 'ybwchppsknpddabc'
 EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'Ehelp-Team <noreply@ehelp.com>'

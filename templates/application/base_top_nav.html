@@ -31,11 +31,12 @@
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle small" href="/dashboard/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="{{ request.user.profile.url }}" class="rounded-circle border" height="15" width="15"> {{ request.user.full_name }}
+                        <img src="{{ request.user.profile.url }}" class="rounded-circle border" height="20" width="20"> {{ request.user.full_name }}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item small" href="/dashboard/"><i class="fa fa-dashboard"></i> Dashboard</a>
-                        <a class="dropdown-item small" href="/profile/"><i class="fa fa-heart"></i> Profile</a>
+                        <a class="dropdown-item small" href="/profile/"><i class="fa fa-user-circle"></i> Profile</a>
+                        <a class="dropdown-item small" href="/queue/"><i class="fa fa-heart"></i> Queue</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item small" href="/setting/"><i class="fa fa-refresh"></i> Settings</a>
                         <a class="dropdown-item small" href="/privacy/"><i class="fa fa-shopping-cart"></i> Privacy</a>
