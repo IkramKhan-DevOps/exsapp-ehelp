@@ -21,6 +21,7 @@ from django.shortcuts import (
 from django.contrib.auth import (
     login,
 )
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.encoding import (
     force_bytes,
     force_text
@@ -67,8 +68,10 @@ def view_signup(request):
             return render(
                 request,
                 template_name='application/signup_confirm.html',
-                context={'message': 'we have sended an account activation link to your email address, i will be '
-                                    'expired after some time so check your mail box'}
+                context={
+                    'message': 'we have sended an account activation link to your email address check your spam folder,'
+                               ' i will be expired after some time so check your mail box'
+                }
             )
     else:
         form = SignUpForm()
@@ -97,15 +100,26 @@ def view_login(request):
 def view_home(request):
     user_queue = None
     if not request.user.is_authenticated:
-        user_requests = RequestModel.objects.all()
+        u_requests = RequestModel.objects.all()
     else:
-        user_requests = RequestModel.objects.filter(active=True)
+        u_requests = RequestModel.objects.filter(active=True)
         user_queue = Queue.objects.filter(user=request.user)
         for queue in user_queue:
-            user_requests = user_requests.exclude(queue=queue)
+            user_requests = u_requests.exclude(queue=queue)
+
+    u_requests = u_requests.order_by('-created')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(u_requests, 15)
+
+    try:
+        user_requests = paginator.page(page)
+    except PageNotAnInteger:
+        user_requests = paginator.page(1)
+    except EmptyPage:
+        user_requests = paginator.page(paginator.num_pages)
 
     context = {
-        'user_requests': user_requests.order_by('-created'),
+        'user_requests': user_requests,
         'user_queue': user_queue
     }
     return render(
@@ -253,7 +267,6 @@ def view_add_update_request(request, pk=0):
 
 @login_required
 def view_request_description(request, pk):
-
     try:
         user_request = RequestModel.objects.get(pk=pk)
 
@@ -299,7 +312,8 @@ def view_request_description(request, pk):
         context = {
             'is_sender': is_sender,
             'user_request': user_request,
-            'hero_response': hero_response
+            'hero_response': hero_response,
+            'total': (hero_response.shipment_points + hero_response.request_points + hero_response.other_points)
         }
         return render(
             request=request,

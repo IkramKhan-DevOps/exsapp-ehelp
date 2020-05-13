@@ -38,21 +38,23 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ehelp/settings.py" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\GIT\Ehelp\assets\application\images" />
+      <recent name="E:\GIT\Ehelp\static\application\images" />
+      <recent name="E:\GIT\HybridHeroes\templates\application" />
+      <recent name="E:\GIT\HybridHeroes\static\application" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\GIT\HybridHeroes\templates" />
       <recent name="E:\GIT\HybridHeroes\templates\application" />
       <recent name="E:\GIT\HybridHeroes\templates\registration" />
       <recent name="E:\GIT\HybridHeroes\media\images" />
       <recent name="E:\GIT\HybridHeroes\HybridHeroes\application" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\GIT\HybridHeroes\templates\application" />
-      <recent name="E:\GIT\HybridHeroes\static\application" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -128,7 +130,7 @@
       <workItem from="1589289771796" duration="13447000" />
       <workItem from="1589316409157" duration="899000" />
       <workItem from="1589323185301" duration="2345000" />
-      <workItem from="1589326885675" duration="950000" />
+      <workItem from="1589326885675" duration="11551000" />
     </task>
     <servers />
   </component>

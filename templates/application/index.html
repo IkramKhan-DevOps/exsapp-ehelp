@@ -12,35 +12,35 @@
 
             {# MAIN-DIV-COL-LEFT-2 #}
             <div class="col-sm-2 py-4 bg-light">
-                <div class="list-unstyled text-secondary small">
+                <div class="list-unstyled text-secondary small" disabled>
                     <b class="list-group-item-heading"><i class="fa fa-search-plus"></i> Search Filters</b>
 
                     <li class="mt-2"><input type="search" class="form-control form-control-sm"
-                                            placeholder="city /country"></li>
-                    <li class="mt-2"><select class="form-control form-control-sm" placeholder="Request Type">
+                                            placeholder="city /country" disabled></li>
+                    <li class="mt-2"><select class="form-control form-control-sm" placeholder="Request Type" disabled>
                         <option>-- request type --</option>
                         <option>Money</option>
                         <option>Equipment</option>
                     </select></li>
-                    <li class="mt-2"><input type="checkbox" class="form-check-label"> Mansehra</li>
-                    <li><input type="checkbox" class="form-check-label"> Pakistan</li>
-                    <li><input type="checkbox" class="form-check-label"> International</li>
+                    <li class="mt-2"><input type="checkbox" class="form-check-label" disabled> Hometown</li>
+                    <li><input type="checkbox" class="form-check-label" disabled> Pakistan</li>
+                    <li><input type="checkbox" class="form-check-label" disabled> International</li>
 
-                    <li class="border-bottom border-top border-danger py-1 mt-2"><input type="checkbox"
+                    <li class="border-bottom border-top border-danger py-1 mt-2"><input type="checkbox" disabled
                                                                                         class="form-check-label"> urgent
                         help
                     </li>
-                    <li><input type="submit" class="mt-2 btn btn-sm btn-primary" value="Find"></li>
+                    <li><input type="submit" class="mt-2 btn btn-sm btn-primary" value="Find" disabled></li>
 
                     <hr>
 
-                    <li><i class="fa fa-sign-out text-danger"></i>
-                        {% if not request.user.is_authenticated %}
-                            <a href="/accounts/login/" class="text-danger"> Login</a>
-                        {% else %}
-                            <a href="/accounts/logout/" class="text-danger"> Logout</a>
-                        {% endif %}
-                    </li>
+{#                    <li><i class="fa fa-sign-out text-danger"></i>#}
+{#                        {% if not request.user.is_authenticated %}#}
+{#                            <a href="/accounts/login/" class="text-danger"> Login</a>#}
+{#                        {% else %}#}
+{#                            <a href="/accounts/logout/" class="text-danger"> Logout</a>#}
+{#                        {% endif %}#}
+{#                    </li>#}
                 </div>
             </div>
 
@@ -95,30 +95,30 @@
 
 
                     {# ADD-REQUEST-DIV #}
-                <a href="/add/request/" class="text-decoration-none">
-                    <div class="border mb-4 bg-white">
+                    <a href="/add/request/" class="text-decoration-none">
+                        <div class="border mb-4 bg-white">
 
                         <textarea class="p-2 border-bottom border-top-0 border-left-0 border-right-0" rows="10"
                                   style="width: 100%;font-size: 13px;"
                                   placeholder="what problem you are facing say it now, there is a hero ready to help ."></textarea>
-                        <div class="row p-3">
-                            <div class="col-6">
-                                <select class="small form-control form-control-sm bg-light border-0" disabled>
-                                    <option>Category</option>
-                                </select>
-                            </div>
-                            <div class="col-6">
-                                <div class="text-right">
-                                    <small class="text-danger"><input type="checkbox" class="form-check-label">
-                                        urgent</small>
-                                    <button class="btn btn-sm bg-light border"><i class="fa fa-image"></i></button>
-                                    <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+                            <div class="row p-3">
+                                <div class="col-6">
+                                    <select class="small form-control form-control-sm bg-light border-0" disabled>
+                                        <option>Category</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-right">
+                                        <small class="text-danger"><input type="checkbox" class="form-check-label">
+                                            urgent</small>
+                                        <button class="btn btn-sm bg-light border"><i class="fa fa-image"></i></button>
+                                        <button class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
-                </a>
+                        </div>
+                    </a>
 
                     {# ADD-REQUEST-CYCLE #}
 
@@ -138,9 +138,12 @@
                                                          style="width: 25px;height: 25px;">
                                                 </td>
                                                 <td>
-                                                    <b><a class="text-dark" href="/dashboard/{{ user_request.user.pk }}/"> {{ user_request.user.full_name }}</a></b> needs help
+                                                    <b><a class="text-dark"
+                                                          href="/dashboard/{{ user_request.user.pk }}/"> {{ user_request.user.full_name }}</a></b>
+                                                    needs help
                                                     in <b>{{ user_request.request_category.name }}</b>
-                                                    from <b>{{ user_request.city.name }}, {{ user_request.country.name }}</b><br>
+                                                    from
+                                                    <b>{{ user_request.city.name }}, {{ user_request.country.name }}</b><br>
                                                 </td>
                                             </tr>
                                         </table>
@@ -171,9 +174,14 @@
                                                 {% else %}
                                                     <a class="btn btn-sm btn-outline-success"
                                                        href="/queue/add/{{ user_request.pk }}/">
-                                                        <i class="fa fa-plus"></i> Add
+                                                        <i class="fa fa-plus"></i> Add to Queue
                                                     </a>
                                                 {% endif %}
+                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                                        data-target="#exampleModal"><i class="fa fa-ban"></i>
+                                                    Report
+                                                </button>
+
                                                 {#                                            <button class="btn btn-sm btn-outline-success" type="button"#}
                                                 {#                                                    class="btn btn-primary" data-toggle="modal"#}
                                                 {#                                                    data-target="#exampleModal">#}
@@ -185,6 +193,34 @@
                                 </div>
                             {% endif %}
                         {% endfor %}
+
+                        <div>
+                            {% if user_requests.has_other_pages %}
+                                <nav aria-label="..." class="navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        {% if user_requests.has_previous %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ user_requests.previous_page_number }}">&laquo;</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                                        {% endif %}
+                                        {% for i in user_requests.paginator.page_range %}
+                                            {% if user_requests.number == i %}
+                                                <li class="active page-item"><span class="page-link">{{ i }} <span
+                                                        class="sr-only">(current)</span></span></li>
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if user_requests.has_next %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ user_requests.next_page_number }}">&raquo;</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                        </div>
                     </div>
 
                 </div>
@@ -216,7 +252,8 @@
                                     {% if request.user.country %}
                                         {{ request.user.country.name }}<br>
                                     {% else %}
-                                        city not found please update your <a href="/profile/#id_country">profile</a><br>
+                                        country not found please update your <a href="/profile/#id_country">profile</a>
+                                        <br>
                                     {% endif %}
                                     <button class="btn btn-sm btn-outline-secondary"><i class="fa fa-heart"></i> Follow
                                     </button>
@@ -240,8 +277,8 @@
                             <tr>
                                 <td>
                                     <a href="#">View #100 Globally</a><br>
-                                    <a href="#">View #100 Pakistan</a><br>
-                                    <a href="#">View #100 Abbotabad</a><br>
+                                    <a href="#">View #100 Country</a><br>
+                                    <a href="#">View #100 City</a><br>
                                     <a href="#"><b>Watch yourself</b></a>
                                 </td>
                             </tr>
@@ -252,17 +289,17 @@
                 {# AIDS-1 #}
                 <div class="p-2  small">
                     <img src="{% static 'application/images/download.jpg' %}" class="img-fluid"><br>
-                    <b>Amazon Cloud AD-1</b>
+                    <b>Custom AD-1 Head</b>
                     <p class="small">
-                        cloud based systems are developed to make things secure reuse able and robust
+                        This is the first aid, just for testing, ad's will be placed by google or by ehelp team
                     </p>
                 </div>
                 {# AIDS-1 #}
                 <div class="p-2  small">
                     <img src="{% static 'application/images/covid-image.jpg' %}" class="img-fluid"><br>
-                    <b>Tarbazar inc AD-2</b>
+                    <b>Custom AD-2 Head</b>
                     <p class="small">
-                        cloud based systems are pos and ecommerce setup to enhance business and logics
+                        This is the second aid, just for testing, ad's will be placed by google or by ehelp team
                     </p>
                 </div>
             </div>
@@ -274,62 +311,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Contact and Confirmation</h5>
+                    <p class="modal-title" id="exampleModalLabel">Report Request</p>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <b>Requester Contact</b><br><br>
-                    <div>
-                        <div class="text-center">
-                            <img src="{% static 'application/images/companyLogo.png' %}" height="100px">
-                            <p class="mt-1"><a href="#">Person Name</a></p>
-                            <p class="small text-muted top-20">Requester</p>
-                            <p class="small text-muted top-20">House#00, Street anonymous, City State, Country
-                                <i class="fa fa-location-arrow border p-1"></i></p>
-                        </div>
-                        <div class="text-center text-muted">
-                            <p><i class="fa fa-phone"></i> +00 000 000 000</p>
-                            <p class="top-20"><i class="fa fa-whatsapp"></i> +00 000 000 000</p>
-                            <p class="top-20"><i class="fa fa-telegram"></i> +00 000 000 000</p>
-                            <p class="top-20"><i class="fa fa-telegram"></i> +00 000 000 000</p>
-                            <p class="top-20"><i class="fa fa-facebook-square"></i> facebook.com/235237823</p>
-                            <p class="top-20"><i class="fa fa-envelope-o"></i> unknown@yahoo.com</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div id="aggrement-div">
-                        <p>
-                            <b>Response Agreement</b><br><br>
-                            Please read the agreement below, if you satisfied then make a response
-                        </p>
-                        <ol class="small text-muted">
-                            <li>The request is from this user not for <a href="#">E-Help</a></li>
-                            <li><a href="#">E-Help</a> just provides you a platform to help the needy</li>
-                            <li>Before accepting request add it to queue contact the requester, satisfy your self then
-                                make a response
-                            </li>
-                            <li>There is no way to detect fake requests, we are not responsible for any loss
-                            </li>
-                            <li>Reported requester will be blocked forever
-                            </li>
-                            <li>Once the request accepted and not fulfilled will effect your rank and decreases
-                                achievement points
-                            </li>
-                            <li>Delivery for your side gives you <b class="text-success">+5</b> points</li>
-                        </ol>
-                        <input type="checkbox" class=""> i am satisfied with the agreement above
-                    </div>
-
+                <div class="modal-body small">
+                    <img class="rounded-circle mx-auto d-flex" src="{% static 'application/images/laughts.jpg' %}"
+                         height="200" width="200"><br>
+                    Sorry, this version is just for developers a demo version with no of errors and problems and it is
+                    open for
+                    testing , you can test, debug, find errors and make fun with friends<br><br>
+                    Thanks<br>
+                    <b>Ikram Khan</b>
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-sm btn-secondary"><i class="fa fa-list"></i> Queue</button>
-                    <button class="btn btn-sm btn-success"><i class="fa fa-check"></i> Accept</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
+
 {% endblock %}
+
