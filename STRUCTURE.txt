@@ -34,27 +34,10 @@ ECOMMERCE PROJECT STRUCTURE
 |   |
 |   +---● css
 |   |   |
-|   |   |---● 404.css
-|   |   |---● all.css
-|   |   |---● bootstrap-theme.min.css
-|   |   |---● bootstraps-min-max-cdn.css
-|   |   |---● font-awesome-4.0.3.css
-|   |   |---● fontawesome.css
-|   |   |---● sidebar-header.css
-|   |   |---● tarrbazar_base_main.css
-|   |
+|   |   
 |   +---● js
 |   |   |
-|   |   |---● ajax-form.js
-|   |   |---● ajax_googlepis_ajax_jquerry.js
-|   |   |---● csrf.js
-|   |   |---● helpers.js
-|   |   |---● inv.js
-|   |   |---● bootstraps_min.js
-|   |   |---● mini_csrf.js
-|   |   |---● slidebar.js
-|   |
-|   +---● TarbazarOfficial
+|   |   
 |   +---● admin
 |   +---● icons
 |   +---● images
