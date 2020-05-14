@@ -98,7 +98,7 @@
                     <a href="/add/request/" class="text-decoration-none">
                         <div class="border mb-4 bg-white">
 
-                        <textarea class="p-2 border-bottom border-top-0 border-left-0 border-right-0" rows="10"
+                        <textarea class="p-2 border-bottom border-top-0 border-left-0 border-right-0" rows="5"
                                   style="width: 100%;font-size: 13px;"
                                   placeholder="what problem you are facing say it now, there is a hero ready to help ."></textarea>
                             <div class="row p-3">
@@ -129,7 +129,7 @@
                                 <div class="border mb-2 bg-white">
 
                                     {# HEAD #}
-                                    <div class="p-2 bg-light text-secondary">
+                                    <div class="p-2 bg-light text-secondary border-bottom">
                                         <table class="small">
                                             <tr>
                                                 <td rowspan="2">
@@ -154,7 +154,7 @@
                                         {# CONTENT #}
                                         <div class="p-4 small border-bottom">
                                             <p>
-                                                {{ user_request.desc }}
+                                                {{ user_request.desc|linebreaksbr }}
                                             </p>
                                             <small class="font-italic">Created: {{ user_request.created }}</small>
                                             {#                                        <img class="img-fluid my-3" src="{% static 'application/images/covid-image.jpg' %}">#}
@@ -164,7 +164,7 @@
                                     {# FOOT #}
                                     <div>
                                         <div class="row p-4">
-                                            <div class="col-6 text-left">
+                                            <div class="text-center">
 
                                                 {% if user_request.pk in user_queue.pk %}
                                                     <a class="btn btn-sm btn-outline-secondary"

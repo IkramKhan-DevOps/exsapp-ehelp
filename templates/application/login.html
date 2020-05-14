@@ -45,15 +45,14 @@
 <div id="page-content">
     <div class="container text-center text-light">
         {#        <img class="rounded mx-auto d-block" src="{% static 'application/images/tb-logo.png' %}" height="100">#}
-        <p class="mt-3" style="margin-bottom: 0px"><b class="h3">Ehelp</b><small> DEMO v0.0.1</small></p>
-        <small class="text-center border-bottom top-20">Be a reason of someone to Smile</small>
+        <a href="/" class="text-decoration-none text-light"><p class="mt-3" style="margin-bottom: 0px"><b class="h3">Ehelp</b><small> DEMO v0.0.1</small></p>
+        <small class="text-center border-bottom top-20">Be a reason of someone to Smile</small></a>
 
         <div class="row justify-content-center">
 
             {# CENTER DIV #}
-            <div class="col-md-5 my-4 my-sm-5">
-
-                <div class="p-sm-5 bg-light text-dark rounded mt-sm-5 shadow-lg">
+            <div class="col-md-6 mt-sm-0 my-4 my-sm-5">
+                <div class="p-5 bg-light text-dark rounded my-sm-2 shadow-lg">
                     {% if messages %}
                         <div class="small">
                             {% for message in messages %}
