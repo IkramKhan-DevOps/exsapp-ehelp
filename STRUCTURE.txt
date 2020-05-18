@@ -1,0 +1,93 @@
+===========================
+ECOMMERCE PROJECT STRUCTURE
+===========================
+
+● Project_Tarbazar
+|
++---● Tarbazar
+|   |
+|   +---● ecommerce
+|   |   |
+|   |   +---● buyer
+|   |   |   |--- views.py
+|   |   |   |--- urls.py
+|   |   |
+|   |   +---● seller
+|   |   |   |--- views.py
+|   |   |   |--- urls.py
+|   |   |
+|   |   +---● communication
+|   |   |   |--- views.py
+|   |   |   |--- urls.py
+|   |
+|   |
+|   +---● TarbazarOfficial
+|   |   |--- urls.py
+|   |   |--- views.py
+|   |
+|   |--- settings.py
+|   |--- urls
+|   |--- wsgi
+|
+|
++---● static
+|   |
+|   +---● css
+|   |   |
+|   |   
+|   +---● js
+|   |   |
+|   |   
+|   +---● admin
+|   +---● icons
+|   +---● images
+|   +---● rest_framework
+|
++---●  assets
++---● media
++---● TarbazarOfficial
+|
+|---  readme.md
+|---  manage.py
+|---  db.sqlite3
+|---  .gitignore
+|---  apilist.txt
+|---  requirements.txt
+|---  projectStructure.txt
+
+
+ ====================
+ ROUGH_STRUCTURE
+ ====================
+
+● Tarbazar
+|
++---● Tarbazar
+|   |
+|   +---● TarbazarCloud
+|   |   +---● customers
+|   |   +---● include
+|   |   +---● inventory
+|   |   +---● license
+|   |   +---● orders
+|   |   +---● settings
+|   |   +---● supplier
+|   |
+|   +---● TarbazarWeb
+|   |   +---● customers-web
+|   |   +---● include-web
+|   |   +---● inventory-web
+|   |   +---● license-web
+|   |   +---● orders-web
+|   |   +---● settings-web
+|   |   +---● supplier-web
+|
+|---● templates
+|   +---● customers
+|   +---● include
+|   +---● inventory
+|   +---● license
+|   +---● orders
+|   +---● settings
+|   +---● supplier
+|   +---● TarbazarOfficial
