@@ -36,3 +36,6 @@ py manage.py runserver
 ```
 ## NOTE
 EHELP is developing by __MARKI__ under the supervision of __Bilal Khan__ and now its under-development phase, some of the features of ehelp are open-source and will be available on github soon, if you want to donate us please contact us :smiley:<br><br>
+
+## NOTE
+Project is allowed to use to help developers for better understanding of django _ project and idea is not allowed to use for commercial or university projects _ please let us know before.
