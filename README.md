@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Tarbazar-DevOps/Ehelp/blob/master/static/application/images/companyLogo.png" height="150">
+  <a href="https://exarth.com/"><img src="https://exarth.com/static/exarth/theme/logo-red-1000.svg" height="150"></a>
 </p><hr>
 
 # PROJECT
